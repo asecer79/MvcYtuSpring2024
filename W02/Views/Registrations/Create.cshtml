@@ -1,4 +1,29 @@
-﻿
+﻿@model Student
 
+<h3> Create a new Student</h3>
+
+
+
+<form action="/Registrations/Create" method="post">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td><input name="id" /></td>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td><input name="firstName" /></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input name="lastName" /></td>
+        </tr>
+        <tr>
+            <td>Department</td>
+            <td><input name="department" /></td>
+        </tr>
+    </table>
+    <input type="submit" value="Create" />
+</form>
 
 

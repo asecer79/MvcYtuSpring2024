@@ -10,6 +10,8 @@
 
 <a href="/Registrations/Create">Create New</a>
 
+@model List<Student>
+
 <table class="table">
     <tr>
         <th>Id</th>
@@ -18,23 +20,22 @@
         <th>Department</th>
         <th>About</th>
     </tr>
-    
-    <tr>
-        <td>1</td>
-        <td>Alican</td>
-        <td>Cesur</td>
-        <td>Meth Eng.</td>
-        <td>
-            <a href="/Registrations/About?id=1&name=Alican">About Me</a>
-        </td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>Murtaza</td>
-        <td>Kızıl</td>
-        <td>Meth Eng.</td>
-        <td>
-            <a href="/Registrations/About?id=2&name=Murtaza">About Me</a>
-        </td>
-    </tr>
+    @{
+        foreach (var student in Model)
+        {
+            <tr>
+                <td>@(student.Id)</td>
+                <td>@student.FirstName</td>
+                <td>@student.LastName</td>
+                <td>@student.Department</td>
+                <td>
+                    <a href="/Registrations/About?id=@(student.Id)">About Me</a> &nbsp;
+                    <a href="/Registrations/Edit?id=@(student.Id)">Edit</a>&nbsp;
+                    <a href="/Registrations/Delete?id=@(student.Id)">Delete</a>
+                </td>
+            </tr>
+   
+        }
+    }
+   
 </table>

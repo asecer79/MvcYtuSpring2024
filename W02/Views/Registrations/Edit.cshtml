@@ -1,0 +1,25 @@
+﻿@model Student
+
+<h3> Edit Student</h3>
+
+<form action="/Registrations/Edit" method="post">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td><input name="id" value="@Model.Id" /></td>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td><input name="firstName" value="@Model.FirstName" /></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input name="lastName" value="@Model.LastName" /></td>
+        </tr>
+        <tr>
+            <td>Department</td>
+            <td><input name="department" value="@Model.Department" /></td>
+        </tr>
+    </table>
+    <input type="submit" value="Update" />
+</form>
