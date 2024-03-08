@@ -2,10 +2,40 @@
 
 Student List
 
+<table class="table table-sm table-dark">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Actions</th>
+    </tr>
 
-@{
-    foreach (var student in Model)
-    {
-        <div> @student.Name</div>
+    @{
+        foreach (var student in Model)
+        {
+                <tr>
+                    <td>@student.Id</td>
+                    <td>@student.Name</td>
+                    <td>@student.Email</td>
+                    <td>@student.Age</td>
+                    <td style="width:200px">
+                        <a asp-controller="Students" asp-action="Create" class="btn btn-sm btn-primary">Create</a>
+                        <a asp-controller="Students" asp-action="Edit" asp-route-studentId="@student.Id" class="btn btn-sm btn-success">Edit</a>
+                        <a onclick="Delete('@student.Id')" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+        }
     }
-}
+
+</table>
+
+<script>
+
+    function Delete(studentId) {
+        if (confirm("Are you sure to delete this record?")) { 
+            window.location = "/Students/Delete?studentId="+studentId;
+        }
+    }
+
+</script>

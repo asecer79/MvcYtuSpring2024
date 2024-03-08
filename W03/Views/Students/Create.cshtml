@@ -1,0 +1,33 @@
+﻿@model Student
+
+Create New Student
+
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-controller="Students" asp-action="Create" method="post">
+
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input type="text" class="form-control" asp-for="Name"/>
+            </div>
+            
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="text" class="form-control" asp-for="Email" />
+            </div>
+            
+            <div class="form-group">
+                <label for="Age">Age</label>
+                <input type="text" class="form-control" asp-for="Age"/>
+            </div>
+
+            <div style="color:red" asp-validation-summary="All"></div>
+
+            <button class="btn btn-sm btn-success mt-2 float-end">Create</button>
+         
+        </form>
+
+    </div>
+</div>

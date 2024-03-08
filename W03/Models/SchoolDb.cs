@@ -13,10 +13,10 @@ namespace W03.Models
                 for (int i = 1; i <= number; i++)
                 {
                     var student = new Faker<Student>()
-                        .RuleFor(s => s.Id, f => f.IndexFaker + 1)
+                        .RuleFor(s => s.Id, f => i)
                         .RuleFor(s => s.Name, f => f.Name.FullName())
                         .RuleFor(s => s.Email, (f, s) => f.Internet.Email(s.Name))
-                        .RuleFor(s => s.Age, f => f.Random.Int(18, 38));
+                        .RuleFor(s => s.Age, f => f.Random.Int(18, 30));
 
 
                     Students.Add(student);

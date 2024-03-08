@@ -14,7 +14,7 @@ namespace W03.Models
         [EmailAddress(ErrorMessage = "Invalid Email format!")]
         public string? Email { get; set; }
 
-        [Required(ErrorMessage = "Email is required!")]
+        [Required(ErrorMessage = "Age is Required!")]
         [Range(18, 30, ErrorMessage = "Age must be between 18 and 30.")]
         public int Age { get; set; }
     }
