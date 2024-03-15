@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ObsWebUI.Models.Entities.Faculty>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Faculties</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+               Dean Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+               @item.Name
+            </td>
+            <td>
+                @item.DeanName
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
