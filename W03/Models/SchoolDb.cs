@@ -20,11 +20,8 @@ namespace W03.Models
 
 
                     Students.Add(student);
-
                 }
-
             }
-            
         }
     }
 }
