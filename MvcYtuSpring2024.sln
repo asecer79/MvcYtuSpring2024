@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "W02", "W02\W02.csproj", "{0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "W03", "W03\W03.csproj", "{4DAAECC0-6862-448A-959A-8908F825814C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObsWebUI", "ObsWebUI\ObsWebUI.csproj", "{C36B4990-6654-49DE-9ECF-788F8DB4988B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObsWebUI", "ObsWebUI\ObsWebUI.csproj", "{C36B4990-6654-49DE-9ECF-788F8DB4988B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{51282188-6899-419D-AEB2-0BC8DEB6F5F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{10110B3C-6447-465A-A64A-A244823E236B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{C36B4990-6654-49DE-9ECF-788F8DB4988B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C36B4990-6654-49DE-9ECF-788F8DB4988B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C36B4990-6654-49DE-9ECF-788F8DB4988B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51282188-6899-419D-AEB2-0BC8DEB6F5F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51282188-6899-419D-AEB2-0BC8DEB6F5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51282188-6899-419D-AEB2-0BC8DEB6F5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51282188-6899-419D-AEB2-0BC8DEB6F5F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10110B3C-6447-465A-A64A-A244823E236B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10110B3C-6447-465A-A64A-A244823E236B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10110B3C-6447-465A-A64A-A244823E236B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10110B3C-6447-465A-A64A-A244823E236B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ObsWebUI.Models.Entities;
+﻿using Entities.ObsEntities;
+using Microsoft.EntityFrameworkCore;
 
-namespace ObsWebUI.Models.EfDbContext
+namespace DataAccess.EfDbContext.Obs
 {
-    public class YtuSchoolDbContext:DbContext
+    public class YtuSchoolDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -14,9 +14,9 @@ namespace ObsWebUI.Models.EfDbContext
 
         public DbSet<Course>? Courses { get; set; }
         public DbSet<Department>? Departments { get; set; }
-        public DbSet<Exam>?Exams { get; set; }
+        public DbSet<Exam>? Exams { get; set; }
         public DbSet<ExamResult>? ExamResults { get; set; }
-        public DbSet<Faculty>? Faculties  { get; set; }
+        public DbSet<Faculty>? Faculties { get; set; }
         public DbSet<Instructor>? Instructors { get; set; }
         public DbSet<InstructorCourse>? InstructorCourses { get; set; }
         public DbSet<Student>? Students { get; set; }

@@ -1,18 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ObsWebUI.Models.Entities
+namespace Entities.ObsEntities
 {
-    public class Department
+    public class InstructorCourse
     {
         [Key]
         public int Id { get; set; }
 
+        [ForeignKey("InstructorId")]
         [Required(ErrorMessage = "This is required")]
-        [ForeignKey("FacultyId")]
-        public int FacultyId { get; set; }
+        public int InstructorId { get; set; }
 
+        [ForeignKey("CourseId")]
         [Required(ErrorMessage = "This is required")]
-        public string? Name { get; set; }
+        public int CourseId { get; set; }
+
     }
 }

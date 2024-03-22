@@ -1,35 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataAccess.Dal.Abstract;
+using Entities.ObsEntities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ObsWebUI.Models.EfDbContext;
-using ObsWebUI.Models.Entities;
 
 namespace ObsWebUI.Controllers
 {
     public class FacultiesController : Controller
     {
-        private readonly YtuSchoolDbContext _context;
+        private readonly IFacultyDal _facultyDal;
 
-        public FacultiesController()
+        public FacultiesController(IFacultyDal facultyDal)
         {
-            _context = new YtuSchoolDbContext();
+            _facultyDal = facultyDal;
         }
 
         // GET: Faculties
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Faculties.ToListAsync());
+            return View(_facultyDal.GetList());
         }
 
         // GET: Faculties/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public  IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var faculty =  _facultyDal.Get(p => p.Id == id);
+
             if (faculty == null)
             {
                 return NotFound();
@@ -44,31 +44,28 @@ namespace ObsWebUI.Controllers
             return View();
         }
 
-        // POST: Faculties/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Faculty faculty)
+        public  IActionResult Create(Faculty faculty)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(faculty);
-                await _context.SaveChangesAsync();
+                _facultyDal.Add(faculty);
                 return RedirectToAction(nameof(Index));
             }
             return View(faculty);
         }
 
         // GET: Faculties/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public  IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties.FindAsync(id);
+            var faculty =  _facultyDal.Get(p => p.Id == id);
+
             if (faculty == null)
             {
                 return NotFound();
@@ -76,12 +73,9 @@ namespace ObsWebUI.Controllers
             return View(faculty);
         }
 
-        // POST: Faculties/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Faculty faculty)
+        public  IActionResult  Edit(int id, Faculty faculty)
         {
             if (id != faculty.Id)
             {
@@ -92,8 +86,7 @@ namespace ObsWebUI.Controllers
             {
                 try
                 {
-                    _context.Update(faculty);
-                    await _context.SaveChangesAsync();
+                    _facultyDal.Update(faculty);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -112,15 +105,14 @@ namespace ObsWebUI.Controllers
         }
 
         // GET: Faculties/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var faculty =  _facultyDal.Get(m=> m.Id == id);
             if (faculty == null)
             {
                 return NotFound();
@@ -129,24 +121,22 @@ namespace ObsWebUI.Controllers
             return View(faculty);
         }
 
-        // POST: Faculties/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var faculty = await _context.Faculties.FindAsync(id);
+            var faculty = _facultyDal.Get(p => p.Id == id);
             if (faculty != null)
             {
-                _context.Faculties.Remove(faculty);
+                _facultyDal.Remove(faculty);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool FacultyExists(int id)
         {
-            return _context.Faculties.Any(e => e.Id == id);
+            return _facultyDal.Any(e => e.Id == id);
         }
     }
 }

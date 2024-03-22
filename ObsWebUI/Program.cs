@@ -1,7 +1,14 @@
+using DataAccess.Dal.Abstract;
+using DataAccess.Dal.Concrete;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Dependency injection
+builder.Services.AddSingleton<IFacultyDal, FacultyDal>();
+builder.Services.AddSingleton<IDepartmentDal, DepartmentDal>();
 
 var app = builder.Build();
 

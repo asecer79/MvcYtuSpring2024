@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ObsWebUI.Models.Entities
+namespace Entities.ObsEntities
 {
     public class Faculty
     {
