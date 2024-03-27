@@ -1,0 +1,56 @@
+﻿@model Entities.ObsEntities.Department
+
+@{
+    ViewData["Title"] = "Edit";
+    var faculties = (List<Faculty>)ViewBag.faculties;
+}
+
+<h1>Edit</h1>
+
+<h4>Department</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="FacultyId" class="control-label">Faculty</label>
+                <select asp-validation-for="FacultyId" id="FacultyId" name="FacultyId" class="form-control">
+                @{
+                    <option></option>
+                    foreach (var faculty in faculties)
+                    {
+                        if (faculty.Id==Model?.FacultyId)
+                        {
+                            <option selected="selected" value="@faculty.Id">@faculty.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@faculty.Id">@faculty.Name</option>
+                        }
+                           
+                    }
+                }
+                </select>
+                <span asp-validation-for="FacultyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
