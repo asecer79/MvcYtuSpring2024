@@ -1,4 +1,4 @@
-﻿using DataAccess.Dal.Abstract;
+﻿using Business.Services.Obs.Abstract;
 using Entities.ObsEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,19 +7,19 @@ namespace ObsWebUI.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private readonly IDepartmentDal _departmentDal;
-        private readonly IFacultyDal _faultyDal;
+        private readonly IDepartmentService _departmentService;
+        private readonly IFacultyService _faultyService;
 
-        public DepartmentsController(IDepartmentDal departmentDal, IFacultyDal faultyDal)
+        public DepartmentsController(IDepartmentService departmentService, IFacultyService faultyService)
         {
-            _departmentDal = departmentDal;
-            _faultyDal = faultyDal;
+            _departmentService = departmentService;
+            _faultyService = faultyService;
         }
 
         // GET: Departments
         public IActionResult Index()
         {
-            return View( _departmentDal.GetList());
+            return View( _departmentService.GetList());
         }
 
         // GET: Departments/Details/5
@@ -30,7 +30,7 @@ namespace ObsWebUI.Controllers
                 return NotFound();
             }
 
-            var department = _departmentDal.Get(p => p.Id == id);
+            var department = _departmentService.Get(p => p.Id == id);
             if (department == null)
             {
                 return NotFound();
@@ -42,7 +42,7 @@ namespace ObsWebUI.Controllers
         // GET: Departments/Create
         public IActionResult Create()
         {
-            ViewBag.faculties = _faultyDal.GetList().OrderBy(p => p.Name).ToList();
+            ViewBag.faculties = _faultyService.GetList().OrderBy(p => p.Name).ToList();
 
             return View();
         }
@@ -53,10 +53,10 @@ namespace ObsWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                _departmentDal.Add(department);
+                _departmentService.Add(department);
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.faculties = _faultyDal.GetList().OrderBy(p => p.Name).ToList();
+            ViewBag.faculties = _faultyService.GetList().OrderBy(p => p.Name).ToList();
 
             return View(department);
         }
@@ -69,13 +69,13 @@ namespace ObsWebUI.Controllers
                 return NotFound();
             }
 
-            var department = _departmentDal.Get(p => p.Id == id);
+            var department = _departmentService.Get(p => p.Id == id);
             if (department == null)
             {
                 return NotFound();
             }
 
-            ViewBag.faculties = _faultyDal.GetList().OrderBy(p => p.Name).ToList();
+            ViewBag.faculties = _faultyService.GetList().OrderBy(p => p.Name).ToList();
 
             return View(department);
         }
@@ -96,7 +96,7 @@ namespace ObsWebUI.Controllers
             {
                 try
                 {
-                    _departmentDal.Update(department);
+                    _departmentService.Update(department);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -112,7 +112,7 @@ namespace ObsWebUI.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.faculties = _faultyDal.GetList().OrderBy(p => p.Name).ToList();
+            ViewBag.faculties = _faultyService.GetList().OrderBy(p => p.Name).ToList();
             return View(department);
         }
 
@@ -124,7 +124,7 @@ namespace ObsWebUI.Controllers
                 return NotFound();
             }
 
-            var department = _departmentDal.Get(p => p.Id == id);
+            var department = _departmentService.Get(p => p.Id == id);
             if (department == null)
             {
                 return NotFound();
@@ -138,10 +138,10 @@ namespace ObsWebUI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var department = _departmentDal.Get(p => p.Id == id);
+            var department = _departmentService.Get(p => p.Id == id);
             if (department != null)
             {
-                _departmentDal.Remove(department);
+                _departmentService.Remove(department);
             }
 
             return RedirectToAction(nameof(Index));
@@ -149,7 +149,7 @@ namespace ObsWebUI.Controllers
 
         private bool DepartmentExists(int id)
         {
-            return _departmentDal.Any(e => e.Id == id);
+            return _departmentService.Any(e => e.Id == id);
         }
     }
 }

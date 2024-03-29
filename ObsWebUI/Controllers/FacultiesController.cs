@@ -1,4 +1,4 @@
-﻿using DataAccess.Dal.Abstract;
+﻿using Business.Services.Obs.Abstract;
 using Entities.ObsEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,17 +7,17 @@ namespace ObsWebUI.Controllers
 {
     public class FacultiesController : Controller
     {
-        private readonly IFacultyDal _facultyDal;
+        private readonly IFacultyService _facultyService;
 
-        public FacultiesController(IFacultyDal facultyDal)
+        public FacultiesController(IFacultyService facultyService)
         {
-            _facultyDal = facultyDal;
+            _facultyService = facultyService;
         }
 
         // GET: Faculties
         public IActionResult Index()
         {
-            return View(_facultyDal.GetList());
+            return View(_facultyService.GetList());
         }
 
         // GET: Faculties/Details/5
@@ -28,7 +28,7 @@ namespace ObsWebUI.Controllers
                 return NotFound();
             }
 
-            var faculty =  _facultyDal.Get(p => p.Id == id);
+            var faculty =  _facultyService.Get(p => p.Id == id);
 
             if (faculty == null)
             {
@@ -50,7 +50,7 @@ namespace ObsWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                _facultyDal.Add(faculty);
+                _facultyService.Add(faculty);
                 return RedirectToAction(nameof(Index));
             }
             return View(faculty);
@@ -64,7 +64,7 @@ namespace ObsWebUI.Controllers
                 return NotFound();
             }
 
-            var faculty =  _facultyDal.Get(p => p.Id == id);
+            var faculty =  _facultyService.Get(p => p.Id == id) ;
 
             if (faculty == null)
             {
@@ -86,7 +86,7 @@ namespace ObsWebUI.Controllers
             {
                 try
                 {
-                    _facultyDal.Update(faculty);
+                    _facultyService.Update(faculty);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -112,7 +112,7 @@ namespace ObsWebUI.Controllers
                 return NotFound();
             }
 
-            var faculty =  _facultyDal.Get(m=> m.Id == id);
+            var faculty =  _facultyService.Get(m=> m.Id == id);
             if (faculty == null)
             {
                 return NotFound();
@@ -125,10 +125,10 @@ namespace ObsWebUI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var faculty = _facultyDal.Get(p => p.Id == id);
+            var faculty = _facultyService.Get(p => p.Id == id);
             if (faculty != null)
             {
-                _facultyDal.Remove(faculty);
+                _facultyService.Remove(faculty);
             }
 
             return RedirectToAction(nameof(Index));
@@ -136,7 +136,7 @@ namespace ObsWebUI.Controllers
 
         private bool FacultyExists(int id)
         {
-            return _facultyDal.Any(e => e.Id == id);
+            return _facultyService.Any(e => e.Id == id);
         }
     }
 }
