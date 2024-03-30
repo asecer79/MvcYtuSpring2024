@@ -2,14 +2,15 @@
 using DataAccess.Dal.Abstract;
 using Entities.ObsEntities;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 using Caching.Abstract;
+using System.Text;
 
 namespace Business.Services.Obs.Concrete
 {
     public class FacultyService(IFacultyDal facultyDal, ICacheProvider cacheProvider) : IFacultyService
     {
-
-        public string GetListKey { get; set; } = "";
+        private HashSet<string> keys = new HashSet<string>();
 
         public bool Any(Expression<Func<Faculty, bool>> filter)
         {
@@ -23,35 +24,61 @@ namespace Business.Services.Obs.Concrete
 
         public Faculty Add(Faculty entity)
         {
-            cacheProvider.Remove(GetListKey);
+            
+            foreach (var key in keys)
+            {
+                cacheProvider.Remove(key);
+            }
             return facultyDal.Add(entity);
         }
 
         public Faculty Update(Faculty entity)
         {
-            cacheProvider.Remove(GetListKey);
+            foreach (var key in keys)
+            {
+                cacheProvider.Remove(key);
+            }
             return facultyDal.Update(entity);
         }
 
         public bool Remove(Faculty entity)
         {
-            cacheProvider.Remove(GetListKey);
+              foreach (var key in keys)
+            {
+                cacheProvider.Remove(key);
+            }
             return facultyDal.Remove(entity);
         }
 
         public List<Faculty> GetList(Expression<Func<Faculty, bool>>? filter = null)
         {
-            GetListKey = $"GetFacultyList";
+            var baseKey = "GetFacultyList";
 
-            if (!cacheProvider.Any(GetListKey))
+            if (filter != null)
             {
-                var result= facultyDal.GetList(filter);
-                cacheProvider.Set(GetListKey,result,TimeSpan.FromSeconds(6000));
+                var filterString = filter.ToString();
 
+                // SHA256 kullanarak bir hash oluştur
+                using (var sha256 = SHA256.Create())
+                {
+                    var hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(filterString));
+                    var hashString = BitConverter.ToString(hashBytes).Replace("-", "");
+
+                    baseKey = $"{baseKey}_{hashString}";
+
+                    keys.Add(baseKey);
+
+                }
+            }
+
+            if (!cacheProvider.Any(baseKey))
+            {
+                var result = facultyDal.GetList(filter);
+                cacheProvider.Set(baseKey, result, TimeSpan.FromSeconds(6000));
                 return result;
             }
 
-            return cacheProvider.Get<List<Faculty>>(GetListKey)!;
+            return cacheProvider.Get<List<Faculty>>(baseKey)!;
         }
     }
 }
