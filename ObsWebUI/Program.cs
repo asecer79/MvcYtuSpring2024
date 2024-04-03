@@ -1,5 +1,10 @@
+using Business.Services.Obs.Abstract;
+using Business.Services.Obs.Concrete;
+using Caching.Abstract;
+using Caching.Concrete;
 using DataAccess.Dal.Abstract;
 using DataAccess.Dal.Concrete;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +14,13 @@ builder.Services.AddControllersWithViews();
 //Dependency injection
 builder.Services.AddSingleton<IFacultyDal, FacultyDal>();
 builder.Services.AddSingleton<IDepartmentDal, DepartmentDal>();
+builder.Services.AddSingleton<IFacultyService, FacultyService>();
+builder.Services.AddSingleton<IDepartmentService, DepartmentService>();
+builder.Services.AddSingleton<IDepartmentService, DepartmentService>();
+builder.Services.AddMemoryCache();
+//builder.Services.AddSingleton<ICacheProvider, MemoryCacheProvider>();
+builder.Services.AddSingleton<ICacheProvider, RedisCacheProvider>();
+
 
 var app = builder.Build();
 
