@@ -87,6 +87,11 @@ app.UseAuthentication();
 
 app.UseMiddleware<IpLoggerMiddleware>();
 
+app.UseMiddleware<AccessLoggerMiddleware>();
+
+app.UseMiddleware<ErrorLoggerMiddleware>();
+
+
 
 app.MapControllerRoute(
     name: "default",

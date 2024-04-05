@@ -1,14 +1,7 @@
 ﻿namespace ObsWebUI.MyMiddlewares
 {
-    public class IpLoggerMiddleware
+    public class IpLoggerMiddleware(RequestDelegate next)
     {
-        private readonly RequestDelegate _next;
-
-        public IpLoggerMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
-
         public async Task InvokeAsync(HttpContext context)
         {
             var ipAddress = context.Request.Host.Value;
@@ -23,10 +16,9 @@
 
             var log = $"{DateTime.Now} Ip: {context.Request.Host.Value} {Environment.NewLine}";
 
-            File.AppendAllText(ipLogFilePath,log);
+            await File.AppendAllTextAsync(ipLogFilePath,log);
 
-
-            await _next(context);
+            await next(context);
         }
     }
 }

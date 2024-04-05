@@ -7,6 +7,9 @@ namespace ObsWebUI.Controllers
     {
         public IActionResult Index()
         {
+
+           // throw new Exception("This is a text exception");
+
             return View();
         }
 
