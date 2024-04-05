@@ -1,4 +1,5 @@
-﻿using Business.Services.Obs.Abstract;
+﻿using System.Diagnostics;
+using Business.Services.Obs.Abstract;
 using Entities.ObsEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace ObsWebUI.Controllers
         // GET: Departments
         public IActionResult Index()
         {
+           
             return View( _departmentService.GetList());
         }
 

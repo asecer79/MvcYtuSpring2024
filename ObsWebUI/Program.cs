@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Business.Services.Obs.Abstract;
 using Business.Services.Obs.Concrete;
 using Caching.Abstract;
@@ -5,6 +6,7 @@ using Caching.Concrete;
 using DataAccess.Dal.Abstract;
 using DataAccess.Dal.Concrete;
 using Microsoft.IdentityModel.Tokens;
+using ObsWebUI.MyMiddlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,14 +35,63 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseAuthentication();
+
+
+//basic simple middleware
+//app.Run(async (context) =>
+//{
+//    //context.Response.Redirect($"/Auth/Login/");
+
+//    Debug.WriteLine(context.Request.HttpContext.User.Identity.IsAuthenticated); //security
+//    Debug.WriteLine(context.Request.Host.Value);//ip address 
+//    Debug.WriteLine(context.Request.Path);//ip address 
+
+
+//});
+
+//app.Run(async (context) => Mid1.MyMiddleware1(context));
+
+
+//app.Use(async (context, next) =>
+//{
+//    Debug.WriteLine("M1-Request:"+context.Request.Path); 
+//    next();
+//    Debug.WriteLine("M1-Response:" + context.Response.StatusCode);
+//});
+//app.Use(async (context, next) =>
+//{
+//    Debug.WriteLine("M2-Request:" + context.Request.Path);
+//    next();
+//    Debug.WriteLine("M2-Response:" + context.Response.StatusCode);
+//});
+//app.Use(async (context, next) =>
+//{
+//    Debug.WriteLine("M3-Request:" + context.Request.Path);
+//    next();
+//    Debug.WriteLine("M3-Response:" + context.Response.StatusCode);
+//});
+//app.Use(async (context, next) =>
+//{
+//    Debug.WriteLine("M4-Request:" + context.Request.Path);
+//    next();
+//    Debug.WriteLine("M4-Response:" + context.Response.StatusCode);
+//});
+
+app.UseMiddleware<IpLoggerMiddleware>();
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.Run();
