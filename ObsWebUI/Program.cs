@@ -91,7 +91,7 @@ app.UseMiddleware<AccessLoggerMiddleware>();
 
 app.UseMiddleware<ErrorLoggerMiddleware>();
 
-
+app.UseMiddleware<PerformanceLoggerMiddleware>();
 
 app.MapControllerRoute(
     name: "default",
