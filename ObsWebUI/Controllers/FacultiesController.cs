@@ -1,10 +1,12 @@
 ﻿using Business.Services.Obs.Abstract;
 using Entities.ObsEntities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ObsWebUI.Controllers
 {
+    [Authorize(Roles = "admin,user")]   //controller level
     public class FacultiesController : Controller
     {
         private readonly IFacultyService _facultyService;
@@ -39,6 +41,8 @@ namespace ObsWebUI.Controllers
         }
 
         // GET: Faculties/Create
+
+        [Authorize] // action
         public IActionResult Create()
         {
             return View();
@@ -46,6 +50,7 @@ namespace ObsWebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public  IActionResult Create(Faculty faculty)
         {
             if (ModelState.IsValid)
