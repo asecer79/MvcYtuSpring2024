@@ -10,11 +10,11 @@ namespace Business.AuthorizationServices.Concrete
 {
     public class AuthService(IUserService userService, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) : IAuthService
     {
-        public async Task<bool> SingIn(string email, string password)
+        public async Task<bool> SingInAsync(string email, string password)
         {
             var user = userService.GetUserByEmailAndPassword(email, password);
 
-            if (user==null)
+            if (user == null)
             {
                 return await Task.FromResult(false);
             }
@@ -31,7 +31,7 @@ namespace Business.AuthorizationServices.Concrete
 
                 foreach (var claim in userOperationClaims)
                 {
-                 claims.Add(new Claim(ClaimTypes.Role,claim.Name!));   
+                    claims.Add(new Claim(ClaimTypes.Role, claim.Name!));
                 }
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -46,7 +46,7 @@ namespace Business.AuthorizationServices.Concrete
             }
         }
 
-        public async Task SingOut()
+        public async Task SingOutAsync()
         {
             await httpContextAccessor.HttpContext.SignOutAsync();
         }

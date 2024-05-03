@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ObsWebUI.Controllers
 {
-    [Authorize(Roles = "admin,user")]   //controller level
+    [Authorize]   //controller level
     public class FacultiesController : Controller
     {
         private readonly IFacultyService _facultyService;

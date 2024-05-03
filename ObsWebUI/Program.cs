@@ -1,6 +1,8 @@
 using System.Configuration;
 using System.Diagnostics;
 using Business.AuthorizationServices;
+using Business.AuthorizationServices.Abstract;
+using Business.AuthorizationServices.Concrete;
 using Business.CommonServices.Abstract;
 using Business.CommonServices.Concrete;
 using Business.Services.Obs.Abstract;
@@ -20,6 +22,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddHttpContextAccessor();
+
+
 //Dependency injection
 builder.Services.AddSingleton<IFacultyDal, FacultyDal>();
 builder.Services.AddSingleton<IDepartmentDal, DepartmentDal>();
@@ -32,7 +37,7 @@ builder.Services.AddSingleton<IUserOperationClaimDal, UserOperationClaimDal>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IOperationClaimService, OperationClaimService>();
 builder.Services.AddSingleton<IUserOperationClaimService, UserOperationClaimService>();
-
+builder.Services.AddSingleton<IAuthService, AuthService>();
 
 builder.Services.AddMemoryCache();
 //builder.Services.AddSingleton<ICacheProvider, MemoryCacheProvider>();

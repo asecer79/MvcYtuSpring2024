@@ -1,5 +1,10 @@
 ﻿@{
-    Layout = null;
+    //Layout = null;
 }
 
-<h3>Login</h3>
+<form asp-controller="Auth" asp-action="Login" method="post">
+    UserName <input type="text" autocomplete="off" name ="email"/>
+    Password <input type="password" autocomplete="off" name ="password"/>
+    <input type="submit" value="Login"/>
+</form>
+

@@ -9,7 +9,7 @@ namespace Business.AuthorizationServices.Abstract
 {
     public interface IAuthService
     {
-        Task<bool> SingIn(string email, string password);
-        Task SingOut();
+        Task<bool> SingInAsync(string email, string password);
+        Task SingOutAsync();
     }
 }
