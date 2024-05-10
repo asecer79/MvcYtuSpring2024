@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{10110B3C-6447-465A-A64A-A244823E236B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{30CDF57F-BF5A-49AE-B311-D1DA875164F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{30CDF57F-BF5A-49AE-B311-D1DA875164F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Caching", "Caching\Caching.csproj", "{DEF3783C-4430-4007-BF79-68A1E5928676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Caching", "Caching\Caching.csproj", "{DEF3783C-4430-4007-BF79-68A1E5928676}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{951CF6DB-6D69-46ED-A176-AF25FB658A5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{DEF3783C-4430-4007-BF79-68A1E5928676}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEF3783C-4430-4007-BF79-68A1E5928676}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEF3783C-4430-4007-BF79-68A1E5928676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{951CF6DB-6D69-46ED-A176-AF25FB658A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{951CF6DB-6D69-46ED-A176-AF25FB658A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{951CF6DB-6D69-46ED-A176-AF25FB658A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{951CF6DB-6D69-46ED-A176-AF25FB658A5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

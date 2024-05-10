@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core.Repositories.CommonInterfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entities.ObsEntities
 {
-    public class Faculty
+    public class Faculty : IEntityBase
     {
         [Key]
         public int Id { get; set; }

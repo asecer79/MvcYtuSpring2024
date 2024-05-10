@@ -4,16 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Repositories.CommonInterfaces;
 
-namespace Entities.CommonEntities
+namespace Core.Repositories.CommonInterfaces
 {
-    public class OperationClaim:IEntityBase
+    public interface IEntityBase
     {
         [Key]
         public int Id { get; set; }
-        public string? Name { get; set; }
 
 
+       
     }
 }

@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core.Repositories.CommonInterfaces;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.ObsEntities
 {
-    public class Department
+    public class Department : IEntityBase
     {
         [Key]
         public int Id { get; set; }

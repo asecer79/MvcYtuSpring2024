@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Core.Repositories.CommonInterfaces;
 
 namespace Entities.CommonEntities
 {
-    public class UserOperationClaim
+    public class UserOperationClaim:IEntityBase
     {
         [Key]
         public int Id { get; set; }

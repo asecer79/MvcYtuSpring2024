@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccess.Dal.CommonOperations;
+﻿using Core.Repositories.CommonInterfaces;
 using Entities.CommonEntities;
-using Entities.ObsEntities;
 
 namespace DataAccess.Dal.Abstract
 {
-    public interface IUserOperationClaimDal:ICommonDal<UserOperationClaim>
+    public interface IUserOperationClaimDal: IRepositoryBase<UserOperationClaim>
     {
         //...special methods for UserOperationClaim.
     }

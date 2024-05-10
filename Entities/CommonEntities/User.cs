@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Repositories.CommonInterfaces;
 
 namespace Entities.CommonEntities
 {
-    public class User
+    public class User:IEntityBase
     {
         [Key]
         public int Id { get; set; }
