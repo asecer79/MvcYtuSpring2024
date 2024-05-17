@@ -10,7 +10,7 @@ namespace Business.Services.Obs.Concrete
 {
     public class FacultyService(IFacultyDal facultyDal, ICacheProvider cacheProvider) : IFacultyService
     {
-        private HashSet<string> keys = new HashSet<string>();
+        private static HashSet<string> keys = new HashSet<string>();
 
         public bool Any(Expression<Func<Faculty, bool>> filter)
         {
@@ -24,7 +24,7 @@ namespace Business.Services.Obs.Concrete
 
         public Faculty Add(Faculty entity)
         {
-            
+           
             foreach (var key in keys)
             {
                 cacheProvider.Remove(key);

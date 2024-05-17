@@ -12,6 +12,7 @@ namespace Caching.Concrete
     {
         public bool Any(string key)
         {
+            var data = memoryCache.Get(key);
             return memoryCache.Get(key) != null;
         }
 
