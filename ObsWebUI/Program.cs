@@ -1,9 +1,6 @@
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Business.AuthorizationServices;
-using Business.Services.Obs.DependencyResolver;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ObsWebUI.MyMiddlewares;
+using ObsWebUI.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,12 +15,7 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddHttpClient();
 
-builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
-{
-    containerBuilder.RegisterModule(new ObsDependencyModule());
-} );
-
+builder.Services.AddSession();
 
 var cookieOptions = builder.Configuration.GetSection("CookieOptions").Get<CookieAuthOptions>();
 
@@ -108,6 +100,8 @@ app.UseMiddleware<ErrorLoggerMiddleware>();
 
 app.UseMiddleware<PerformanceLoggerMiddleware>();
 
+
+app.UseSession();
 
 app.UseAuthentication();
 

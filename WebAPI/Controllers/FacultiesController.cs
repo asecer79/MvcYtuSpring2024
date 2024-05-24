@@ -1,6 +1,7 @@
 ﻿using Business.Services.Obs.Abstract;
 using Business.Services.Obs.Concrete;
 using Entities.ObsEntities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -18,6 +19,7 @@ namespace WebAPI.Controllers
             return await Task.FromResult<IActionResult>(response);
         }
 
+        [Authorize(Roles = "admin,user")]
         [HttpGet("GetList")]
         public async Task<IActionResult> GetList()
         {
@@ -28,6 +30,7 @@ namespace WebAPI.Controllers
             return await Task.FromResult<IActionResult>(response) ;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost("Create")]
         public async Task<IActionResult> Create(Faculty entity)
         {

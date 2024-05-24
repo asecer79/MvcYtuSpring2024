@@ -1,10 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using Business.CommonServices.Abstract;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ObsWebUI.Controllers
-{  
+{
 
     public class HomeController : Controller
     {
@@ -13,9 +11,6 @@ namespace ObsWebUI.Controllers
         {
             return View();
         }
-
-
-
 
     }
 }
