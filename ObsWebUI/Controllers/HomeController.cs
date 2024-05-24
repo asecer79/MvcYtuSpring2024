@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ObsWebUI.Controllers
 {
-
     public class HomeController : Controller
     {
         [Authorize]
@@ -11,6 +10,5 @@ namespace ObsWebUI.Controllers
         {
             return View();
         }
-
     }
 }
